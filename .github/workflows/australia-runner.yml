@@ -1,0 +1,29 @@
+name: Australia Stealth View Runner Batch
+
+on:
+  schedule:
+    - cron: '*/45 * * * *'  # Runs automatically every 45 minutes on cloud network
+  workflow_dispatch:        # Allows you to click "Run workflow" manually anytime
+
+jobs:
+  execute-bot:
+    runs-on: ubuntu-latest  # Runs on clean, secure terminal instance
+    
+    steps:
+    - name: Pulling Code Matrix From Repository
+      uses: actions/checkout@v4
+
+    - name: Activating Python System Runtime
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Injecting Core Network Scraping Libraries
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests beautifulsoup4
+
+    - name: Launching Bot Framework via Australia Sydney Cloud Servers
+      env:
+        TZ: Australia/Sydney  # Locking server execution clock to Sydney, Australia
+      run: python bot.py
